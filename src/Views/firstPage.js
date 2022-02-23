@@ -4,7 +4,7 @@ export const firstPage = () => {
   divFirstPage.className = 'div';
   const pageFirstPage = ` 
       <h1 class ="login-title"> Primera Página </h1>
-            <a href="#/home">Volver</a>
+            <a  class="btn" href="#/home">Volver</a>
         `;
   divFirstPage.innerHTML = pageFirstPage;
   return divFirstPage;
