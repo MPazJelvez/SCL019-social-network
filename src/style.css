@@ -16,6 +16,7 @@
   --bold:800px;
   --regular:600px;
   --light:300px;
+  --error-color: #970071;
 
 }
 .btn {
@@ -45,7 +46,6 @@ background-clip: content-box;
 font-weight:bold;
 color:var(--primary);
 text-align: center;
-
 }
 
 header{
@@ -172,4 +172,15 @@ margin: 2rem auto;
 .google{
 width:1rem ;
 height:1rem ;
+}
+
+.error-message{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.error{
+  color: var(--error-color);
+  text-align: center;
+  width: 100%;
 }

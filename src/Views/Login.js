@@ -4,22 +4,26 @@ export const login = () => {
   divLogin.className = 'div';
   const pageLogin = ` 
     <h1 class ="login-title"> Iniciar Sesion</h1>
+        <div class="error-message">
+        <span class="error"> Ingrese un correo válido </span>
+        <span class="error"> Ingrese un usuario válido </span>
+        <span class="error"> Ingresa una contraseña </span>
+        <span class="error"> No puede haber espacios vacíos </span>
+        <span class="error"> Completar este campo para poder continuar </span>
+        </div>
        <form class="login-form">
          <div class="login-input">
-           <label for ="userEmail">Correo/ Usuario</label>
+           <label for="userEmail">Correo/ Usuario</label>
            <input type="text" placeholder="ingresa tu correo o nombre de usuario" 
-           name ="userEmail">
+           name="userEmail" id="userEmail">
           </div>
           <div class="login-input">
            <label for ="password">Contraseña</label>
            <input type="password" placeholder="ingresa tu Contraseña" 
-           name ="password">
+           name ="password" id="password">
            </div>
-
          <span> ¿Has olvidado tu contraseña?</span>
-
          <a class="btn" href="#">Ingresar</a>
-      
        </form>
  
    `;

@@ -5,6 +5,14 @@ export const register = () => {
   const pageRegister = ` 
 
 <h1 class ="register-title"> Registrarse</h1>
+        <div class="error-message">
+        <span class="error"> Ingrese un correo válido </span>
+        <span class="error"> Ingrese un usuario válido </span>
+        <span class="error"> Ingresa una contraseña </span>
+        <span class="error"> Repetir contraseña </span>
+        <span class="error"> Las contraseñas no coinciden </span>
+        <span class="error"> Debes aceptar los términos y condiciones para poder continuar </span>
+        </div>
        <form class="register-form">
           <div class="register-input">
            <label for ="Email">Correo</label>
