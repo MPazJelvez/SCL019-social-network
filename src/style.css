@@ -58,6 +58,7 @@ display: block;
 margin:5rem auto;
 width:20vh ;
 height:20vh;
+filter:drop-shadow(10px 10px 15px grey)
 
 }
 .home-btn {
