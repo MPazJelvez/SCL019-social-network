@@ -1,4 +1,4 @@
-import { authGoogle } from "../lib/index.js"; 
+import { authGoogle } from '../lib/index.js';
 
 export const home = () => {
   window.location.hash = '/home';
