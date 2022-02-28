@@ -2,7 +2,7 @@ export const login = () => {
   window.location.hash = '/login';
   const divLogin = document.createElement('div');
   divLogin.className = 'div';
-  const pageLogin = ` 
+  divLogin.innerHTML = ` 
     <h1 class ="login-title"> Iniciar Sesion</h1>
         <div class="error-message">
         <span class="error"> Ingrese un correo válido </span>
@@ -23,11 +23,16 @@ export const login = () => {
            name ="password" id="password">
            </div>
          <span> ¿Has olvidado tu contraseña?</span>
-         <a class="btn" href="#">Ingresar</a>
+         <a class="btn" href="#/firstPage" id="login">Ingresar</a>
        </form>
  
    `;
-  divLogin.innerHTML = pageLogin;
+
+  divLogin.querySelector('#login').addEventListener('click', () => {
+    const emailInput = document.querySelector('#userEmail').value;
+    const passwordInput = document.querySelector('#password').value;
+    // createUser(emailInput, passwordInput);
+  });
 
   return divLogin;
 };
