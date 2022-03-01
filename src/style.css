@@ -194,4 +194,10 @@ height:1rem ;
   color: var(--error-color);
   text-align: center;
   width: 100%;
+  display: inline-block;
 }
+
+/* .hidden {
+  display: none;
+}
+ */

@@ -5,7 +5,7 @@ import { firstPage } from '../Views/firstPage.js';
 
 export const router = (hash) => {
   const containerRoot = document.getElementById('app');
-  containerRoot.innerHTML = '';// reemplaza el contenido de containerRoot por una cadena vacia
+  containerRoot.innerHTML = '';// se reinicia a vacio
   if (hash === '#/' || hash === '/' || hash === '#' || hash === '') {
     containerRoot.appendChild(home());
   } else if (hash === '#/home') {
