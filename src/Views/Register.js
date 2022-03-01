@@ -9,7 +9,6 @@ export const register = () => {
 <h1 class ="register-title"> Registrarse</h1>
         <div class="error-message">
         <span class="error"> Ingrese un correo válido </span>
-        <span class="error"> Ingrese un usuario válido </span>
         <span class="error"> Ingresa una contraseña </span>
         <span class="error"> Repetir contraseña </span>
         <span class="error"> Las contraseñas no coinciden </span>
@@ -48,8 +47,7 @@ export const register = () => {
   divRegister.querySelector('#register').addEventListener('click', () => {
     const emailInput = document.querySelector('#email').value;
     const passwordInput = document.querySelector('#password').value;
-    const userInput = document.querySelector('#user').value;
-    createUser(emailInput, passwordInput, userInput);
+    createUser(emailInput, passwordInput);
   });
 
   return divRegister;
