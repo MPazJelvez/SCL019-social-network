@@ -40,7 +40,7 @@ export const authGoogle = () => {
     const token = credential.accessToken;
     // The signed-in user info.
     const user = result.user;
-    console.log(user)
+   
     // ...
   }).catch((error) => {
     // Handle Errors here.
@@ -59,6 +59,7 @@ export const createUser = (emailInput, passwordInput, userInput) => {
     .then((userCredential) => {
     // Signed in
       const user = userCredential.user;
+      console.log()
       console.log(user);
       console.log('created');
     // window.location.hash = '/#login';
@@ -68,7 +69,7 @@ export const createUser = (emailInput, passwordInput, userInput) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       alert('ingresa correo y contraseña válidos');
-      console.log(errorCode + errorMessage);
+      console.log(errorCode);
       // window.location.hash = '#/login';
     // ..
     });
