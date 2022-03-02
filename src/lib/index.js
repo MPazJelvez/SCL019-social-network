@@ -66,12 +66,15 @@ export const createUser = (emailInput, passwordInput) => {
       const errorMessage = error.message;
       alert('ingresa correo y contraseña válidos');
       console.log(errorCode + errorMessage);
+
       const passwordInput = document.querySelector('#password').value;
       const passwordRepeat = document.querySelector('#repeatPassword').value;
       const username = document.querySelector('#user').value;
+      const passwordNotMatch = document.querySelector('#passwordNotMatch').value;
+
 
       if (passwordInput != passwordRepeat) {
-        alert('Las contraseñas no coinciden');
+        passwordNotMatch.classList.toggle('hidden')
       }
       if (username === '') {
         alert('Completa este campo')
@@ -92,6 +95,7 @@ export const createUser = (emailInput, passwordInput) => {
         alert('Ingresa una contraseña');
       }
     });
+    return createUserWithEmailAndPassword
 };
 
 export const signIn = (emailInput, passwordInput) => {
@@ -116,15 +120,18 @@ export const signIn = (emailInput, passwordInput) => {
 
       if (errorCode === 'auth/invalid-email') {
         alert('Correo Inválido');
+        emailError.classList.toggle('hidden')
       }
       if (errorCode === 'auth/wrong-password') {
         alert('Contraseña Incorrecta');
+        passwordError.classList.toggle('hidden')
       }
       if (errorCode === 'auth/user-not-found') {
-        alert('Usuario no encontrado');
+        
       }
       if (errorCode === 'auth/internal-error') {
-        alert('Ingresa una contraseña');
+        completeError.classList.toggle('hidden')
       }
     });
+    return signInWithEmailAndPassword;
 };

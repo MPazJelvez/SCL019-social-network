@@ -8,11 +8,11 @@ export const register = () => {
 
 <h1 class ="register-title"> Registrarse</h1>
         <div class="error-message">
-        <span class="error"> Ingrese un correo válido </span>
-        <span class="error"> Ingresa una contraseña </span>
-        <span class="error"> Repetir contraseña </span>
-        <span class="error"> Las contraseñas no coinciden </span>
-        <span class="error"> Debes aceptar los términos y condiciones para poder continuar </span>
+        <span class="error hidden"> Ingrese un correo válido </span>
+        <span class="error hidden"> Ingresa una contraseña </span>
+        <span class="error hidden"> Repetir contraseña </span>
+        <span class="error hidden" id="passwordNotMatch"> Las contraseñas no coinciden </span>
+        <span class="error hidden"> Debes aceptar los términos y condiciones para poder continuar </span>
         </div>
        <form class="register-form">
           <div class="register-input">
@@ -44,7 +44,8 @@ export const register = () => {
       
        </form>
        `;
-  divRegister.querySelector('#register').addEventListener('click', () => {
+  divRegister.querySelector('#register').addEventListener('click', (e) => {
+      e.preventDefault();
     const emailInput = document.querySelector('#email').value;
     const passwordInput = document.querySelector('#password').value;
     createUser(emailInput, passwordInput);

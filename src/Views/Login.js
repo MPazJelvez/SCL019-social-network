@@ -7,7 +7,7 @@ export const login = () => {
   divLogin.innerHTML = ` 
     <h1 class ="login-title"> Iniciar Sesión</h1>
         <div class="error-message">
-        <span class="error" id="invalidEmail"> Ingrese un correo válido </span>
+        <span class="error hidden" id="invalidEmail"> Ingrese un correo válido </span>
         <span class="error hidden" id="invalidPassword"> Ingresa una contraseña </span>
         <span class="error hidden" id="noSpace"> No puede haber espacios vacíos </span>
         </div>
@@ -28,7 +28,8 @@ export const login = () => {
  
    `;
 
-  divLogin.querySelector('#login').addEventListener('click', () => {
+  divLogin.querySelector('#login').addEventListener('click', (e) => {
+    e.preventDefault()
     const emailInput = document.querySelector('#userEmail').value;
     const passwordInput = document.querySelector('#password').value;
    signIn(emailInput, passwordInput);
