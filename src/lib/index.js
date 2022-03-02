@@ -64,16 +64,15 @@ export const createUser = (emailInput, passwordInput) => {
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      alert('ingresa correo y contraseña válidos');
       console.log(errorCode + errorMessage);
 
       const passwordInput = document.querySelector('#password').value;
       const passwordRepeat = document.querySelector('#repeatPassword').value;
       const username = document.querySelector('#user').value;
+      const checkbox = document.getElementById('checkbox');
       // span errors 
       const invalidEmail = document.getElementById('invalidEmail');
       const invalidPassword = document.getElementById('invalidPassword');
-      const repeatPassword = document.getElementById('repeatPassword');
       const passwordNotMatch = document.getElementById('passwordNotMatch');
       const missingEmail = document.getElementById('missingEmail');
       const weakPassword = document.getElementById('weakPassword');
@@ -82,27 +81,32 @@ export const createUser = (emailInput, passwordInput) => {
       const agreeTC = document.getElementById('agreeTC');
       // manejar el input de terminos y condiciones
 
-      if (passwordInput != passwordRepeat) {
-        passwordNotMatch.classList.toggle('hidden')
-      }
       if (errorCode === 'auth/missing-email') {
         missingEmail.classList.toggle('hidden')
       }
-      if (errorCode === 'auth/invalid-email' || username === '' ) {
+      if (errorCode === 'auth/invalid-email'  ) {
         invalidEmail.classList.toggle('hidden')
       }
       if (errorCode === 'auth/email-already-in-use') {
         emailAlreadyUse.classList.toggle('hidden')
       }
-      if (errorCode === 'auth/weak-password') {
-        weakPassword.classList.toggle('hidden')
-      }
       if (errorCode === 'auth/internal-error') {
         invalidPassword.classList.toggle('hidden')
       }
-      if (errorCode === 'auth/invalid-display-name') {
+      if (errorCode === 'auth/weak-password') {
+        weakPassword.classList.toggle('hidden')
+      }
+      if (passwordInput !== passwordRepeat || passwordRepeat === '') {
+        passwordNotMatch.classList.toggle('hidden')
+      }
+
+      if (errorCode === 'auth/invalid-display-name' || username === '') {
         invalidUserName.classList.toggle('hidden')
       }
+      if (!checkbox.checked ) {
+        agreeTC.classList.toggle('hidden')
+      }
+
     });
     return createUserWithEmailAndPassword
 };
