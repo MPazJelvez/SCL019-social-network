@@ -8,8 +8,10 @@ export const login = () => {
     <h1 class ="login-title"> Iniciar Sesión</h1>
         <div class="error-message">
         <span class="error hidden" id="invalidEmail"> Ingrese un correo válido </span>
-        <span class="error hidden" id="invalidPassword"> Ingresa una contraseña </span>
+        <span class="error hidden" id="invalidPassword"> Contraseña incorrecta </span>
         <span class="error hidden" id="noSpace"> No puede haber espacios vacíos </span>
+        <span class="error hidden" id="userNotFound"> Usuario no encontrado </span>
+        <span class="error hidden" id="completeField"> Debes ingresar una contraseña </span>
         </div>
        <form class="login-form">
          <div class="login-input">

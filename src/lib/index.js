@@ -70,29 +70,38 @@ export const createUser = (emailInput, passwordInput) => {
       const passwordInput = document.querySelector('#password').value;
       const passwordRepeat = document.querySelector('#repeatPassword').value;
       const username = document.querySelector('#user').value;
-      const passwordNotMatch = document.querySelector('#passwordNotMatch').value;
-
+      // span errors 
+      const invalidEmail = document.getElementById('invalidEmail');
+      const invalidPassword = document.getElementById('invalidPassword');
+      const repeatPassword = document.getElementById('repeatPassword');
+      const passwordNotMatch = document.getElementById('passwordNotMatch');
+      const missingEmail = document.getElementById('missingEmail');
+      const weakPassword = document.getElementById('weakPassword');
+      const invalidUserName = document.getElementById('invalidUserName');
+      const emailAlreadyUse = document.getElementById('emailAlreadyUse');
+      const agreeTC = document.getElementById('agreeTC');
+      // manejar el input de terminos y condiciones
 
       if (passwordInput != passwordRepeat) {
         passwordNotMatch.classList.toggle('hidden')
       }
-      if (username === '') {
-        alert('Completa este campo')
-      }
       if (errorCode === 'auth/missing-email') {
-        alert('Ingresa un correo');
+        missingEmail.classList.toggle('hidden')
       }
-      if (errorCode === 'auth/invalid-email') {
-        alert('Correo Inválido');
+      if (errorCode === 'auth/invalid-email' || username === '' ) {
+        invalidEmail.classList.toggle('hidden')
       }
-      if (errorCode === 'email-already-in-use') {
-        alert('Usuario ya existe');
+      if (errorCode === 'auth/email-already-in-use') {
+        emailAlreadyUse.classList.toggle('hidden')
       }
-      if (errorCode === 'weak-password') {
-        alert('Contraseña débil');
+      if (errorCode === 'auth/weak-password') {
+        weakPassword.classList.toggle('hidden')
       }
       if (errorCode === 'auth/internal-error') {
-        alert('Ingresa una contraseña');
+        invalidPassword.classList.toggle('hidden')
+      }
+      if (errorCode === 'auth/invalid-display-name') {
+        invalidUserName.classList.toggle('hidden')
       }
     });
     return createUserWithEmailAndPassword
@@ -113,21 +122,21 @@ export const signIn = (emailInput, passwordInput) => {
       const errorMessage = error.message;
       console.log(errorCode);
       window.location.hash = '#/login';
+
       const emailError = document.getElementById('invalidEmail');
       const passwordError = document.getElementById('invalidPassword');
       const space = document.getElementById('noSpace');
       const completeError = document.getElementById('completeField');
+      const userNotFound = document.getElementById('userNotFound');
 
       if (errorCode === 'auth/invalid-email') {
-        alert('Correo Inválido');
         emailError.classList.toggle('hidden')
       }
       if (errorCode === 'auth/wrong-password') {
-        alert('Contraseña Incorrecta');
         passwordError.classList.toggle('hidden')
       }
       if (errorCode === 'auth/user-not-found') {
-        
+        userNotFound.classList.toggle('hidden')
       }
       if (errorCode === 'auth/internal-error') {
         completeError.classList.toggle('hidden')
