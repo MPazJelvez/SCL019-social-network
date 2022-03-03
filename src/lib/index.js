@@ -6,7 +6,9 @@ import { getAuth,
   GoogleAuthProvider,
   getRedirectResult,
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js';
+  signInWithEmailAndPassword,
+  sendEmailVerification, 
+  sendPasswordResetEmail} from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -41,6 +43,7 @@ export const authGoogle = () => {
     const token = credential.accessToken;
     // The signed-in user info.
     const user = result.user;
+    window.location.hash = '#/firstPage';
   }).catch((error) => {
     // Handle Errors here.
     const errorCode = error.code;
@@ -59,21 +62,26 @@ export const createUser = (emailInput, passwordInput) => {
     // Signed in
       const user = userCredential.user;
       console.log(user);
+      const username = document.querySelector('#user').value;
+      user.displayName = username;
+      console.log(username)
+      emailVerification();
+      alert('Revisa tu correo!');
       console.log('created');
+      window.location.hash = '#/login';
+      
+      return user;
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorCode + errorMessage);
 
-      const passwordInput = document.querySelector('#password').value;
-      const passwordRepeat = document.querySelector('#repeatPassword').value;
       const username = document.querySelector('#user').value;
       const checkbox = document.getElementById('checkbox');
       // span errors 
       const invalidEmail = document.getElementById('invalidEmail');
       const invalidPassword = document.getElementById('invalidPassword');
-      const passwordNotMatch = document.getElementById('passwordNotMatch');
       const missingEmail = document.getElementById('missingEmail');
       const weakPassword = document.getElementById('weakPassword');
       const invalidUserName = document.getElementById('invalidUserName');
@@ -96,17 +104,12 @@ export const createUser = (emailInput, passwordInput) => {
       if (errorCode === 'auth/weak-password') {
         weakPassword.classList.toggle('hidden')
       }
-      if (passwordInput !== passwordRepeat || passwordRepeat === '') {
-        passwordNotMatch.classList.toggle('hidden')
-      }
-
       if (errorCode === 'auth/invalid-display-name' || username === '') {
         invalidUserName.classList.toggle('hidden')
       }
       if (!checkbox.checked ) {
         agreeTC.classList.toggle('hidden')
       }
-
     });
     return createUserWithEmailAndPassword
 };
@@ -148,3 +151,26 @@ export const signIn = (emailInput, passwordInput) => {
     });
     return signInWithEmailAndPassword;
 };
+
+const emailVerification = () => {
+sendEmailVerification(auth.currentUser)
+  .then(() => {
+    console.log('correo enviado')
+    // Email verification sent!
+    // ...
+  })  
+};
+
+export const resetPassword = (email) => {
+  sendPasswordResetEmail(auth, email)
+  .then(() => {
+    console.log('Correo enviado')
+    // Password reset email sent!
+    // ..
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+  });
+}
