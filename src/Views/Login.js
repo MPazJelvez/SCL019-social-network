@@ -1,4 +1,5 @@
 import { signIn } from '../lib/index.js';
+import { resetPassword } from '../lib/index.js';
 
 export const login = () => {
   window.location.hash = '/login';
@@ -24,7 +25,7 @@ export const login = () => {
            <input type="password" placeholder="ingresa tu Contraseña" 
            name ="password" id="password">
            </div>
-         <span> ¿Has olvidado tu contraseña?</span>
+         <span id="resetPassword" class="resetPassword"> ¿Has olvidado tu contraseña?</span>
          <a class="btn" href="#" id="login">Ingresar</a>
        </form>
  
@@ -35,6 +36,12 @@ export const login = () => {
     const emailInput = document.querySelector('#userEmail').value;
     const passwordInput = document.querySelector('#password').value;
    signIn(emailInput, passwordInput);
+  });
+
+  divLogin.querySelector('#resetPassword').addEventListener('click', (e) => {
+    e.preventDefault()
+    const emailInput = document.querySelector('#userEmail').value;
+    resetPassword(emailInput);
   });
 
   return divLogin;
