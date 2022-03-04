@@ -10,7 +10,6 @@ export const login = () => {
         <div class="error-message">
         <span class="error hidden" id="invalidEmail"> Ingrese un correo válido </span>
         <span class="error hidden" id="invalidPassword"> Contraseña incorrecta </span>
-        <span class="error hidden" id="noSpace"> No puede haber espacios vacíos </span>
         <span class="error hidden" id="userNotFound"> Usuario no encontrado </span>
         <span class="error hidden" id="completeField"> Debes ingresar una contraseña </span>
         </div>
@@ -26,7 +25,7 @@ export const login = () => {
            name ="password" id="password">
            </div>
          <span id="resetPassword" class="resetPassword"> ¿Has olvidado tu contraseña?</span>
-         <a class="btn" href="#" id="login">Ingresar</a>
+         <a class="btn" href="" id="login">Ingresar</a>
        </form>
  
    `;
