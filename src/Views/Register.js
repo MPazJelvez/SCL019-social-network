@@ -10,12 +10,10 @@ export const register = () => {
         <div class="error-message">
         <span class="error hidden" id="invalidEmail"> Ingrese un correo válido </span>
         <span class="error hidden" id="invalidPassword"> Ingresa una contraseña </span>
-        <span class="error hidden" id="repeatPassword"> Repetir contraseña </span>
         <span class="error hidden" id="agreeTC"> Debes aceptar los términos y condiciones para poder continuar </span>
-        <span class="error hidden" id="passwordNotMatch"> Las contraseñas no coinciden </span>
         <span class="error hidden" id="missingEmail"> Ingresa un correo </span>
-        <span class="error hidden" id="weakPassword"> La contraseña debe tener al menos 6 carácteres </span>
-        <span class="error hidden" id="invalidUserName"> El nommbre de usuario no puede estar vacío </span>
+        <span class="error hidden" id="weakPassword"> La contraseña debe tener al menos 6 caracteres </span>
+        <span class="error hidden" id="invalidUserName"> El nombre de usuario no puede estar vacío </span>
         <span class="error hidden" id="emailAlreadyUse"> El correo ya está en uso </span>
         </div>
        <form class="register-form">
@@ -34,14 +32,9 @@ export const register = () => {
            <input type="password" placeholder="ingresa tu Contraseña" 
            name ="password" id="password">
           </div>
-          <div class="register-input">
-           <label for ="password">Repetir Contraseña</label>
-           <input type="password" placeholder="ingresa tu Contraseña" 
-           name ="password" id="repeatPassword">
-          </div>
           <div class="register-input center" >
        
-         <span > <input type="checkbox"> He leído y acepto los términos y condiciones </span>
+         <span > <input type="checkbox" id="checkbox"> He leído y acepto los términos y condiciones </span>
           </div>
 
          <a class="btn" href="#/firstPage" id="register">Registrarse</a>

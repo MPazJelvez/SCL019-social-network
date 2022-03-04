@@ -41,12 +41,16 @@ background-clip: content-box;
 */
  
 
-.contenedor{
-  height: 100vh; 
+.container { 
   background: linear-gradient(180deg, rgba(205,240,234,1) 0%, rgba(247,219,240,1) 50%, rgba(249,249,249,1) 100%);
   background-repeat: no-repeat;
   background-clip: content-box;
+  position: relative;
+  min-height: 100vh;
    
+}
+.container-wrap{
+  padding-bottom: 2.5rem;
 }
 
 .home-title,
@@ -88,7 +92,7 @@ background-color:var(--third);
 display: flex;
 align-items: center;
 justify-content: center;
-position:fixed;
+position:absolute;
 bottom:0;
 height:5.9vh;
 width:100%;
@@ -147,7 +151,7 @@ box-shadow:  9px 9px 13px var(--fourth);
 .register-form{
 display: grid;
 grid-template-columns:repeat(1, 15rem) ;
-grid-template-rows: repeat(4, 4rem) 3rem 4rem;
+grid-template-rows: repeat(3, 4rem) 3rem 4rem;
 row-gap: 1rem;
 align-items: center;
 justify-content: center;
@@ -202,3 +206,7 @@ height:1rem ;
   display: none;
 }
 
+.resetPassword{
+  cursor: pointer;
+  color:var(--error-color);
+}
