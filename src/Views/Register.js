@@ -37,7 +37,7 @@ export const register = () => {
          <span > <input type="checkbox" id="checkbox"> He leído y acepto los términos y condiciones </span>
           </div>
 
-         <a class="btn" href="#/firstPage" id="register">Registrarse</a>
+         <a class="btn" href="" id="register">Registrarse</a>
       
        </form>
        `;
