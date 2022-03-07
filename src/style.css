@@ -47,8 +47,8 @@ background-clip: content-box;
   background-clip: content-box;
   position: relative;
   min-height: 100vh;
-   
 }
+
 .container-wrap{
   padding-bottom: 2.5rem;
 }
@@ -94,13 +94,37 @@ align-items: center;
 justify-content: center;
 position:absolute;
 bottom:0;
-height:5.9vh;
+height: 8vh;
 width:100%;
-margin: 0;
+margin-top: 3rem;
+/* margin: 0vh; */
 padding: 0;
+flex-wrap: wrap;
 }
 
+.copyright{
+  background-color:var(--third);
+  padding: 1rem;
+  position:absolute;
+  width: 100%;
+  text-align: center;
+  font-size: 2vh;
+  margin-top: 3.5rem;
+}
+
+.copyright > a{
+  color: var(--primary);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.copyright > a:visited{
+  color: var(--error-color);
+}
+
+
   .social-icon{ 
+    z-index: 1;
     padding: 10px 10px;
     color:#f7f8f7;
     text-decoration: none;
@@ -210,3 +234,4 @@ height:1rem ;
   cursor: pointer;
   color:var(--error-color);
 }
+
