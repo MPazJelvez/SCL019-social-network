@@ -42,7 +42,7 @@ export const register = () => {
        </form>
        `;
   divRegister.querySelector('#register').addEventListener('click', (e) => {
-      e.preventDefault();
+    e.preventDefault();
     const emailInput = document.querySelector('#email').value;
     const passwordInput = document.querySelector('#password').value;
     createUser(emailInput, passwordInput);

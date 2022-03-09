@@ -7,6 +7,7 @@
   text-decoration: none;
  
 }
+
 :root{
   --primary:#978ABC;
   --second:#f9f9f9;
@@ -17,8 +18,8 @@
   --regular:600px;
   --light:300px;
   --error-color: #970071;
-
 }
+
 .btn {
   text-decoration: none;
   padding: 1rem 2rem;
