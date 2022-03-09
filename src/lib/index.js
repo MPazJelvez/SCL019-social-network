@@ -28,7 +28,7 @@ export const authGoogle = () => {
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
-      window.location.hash = '#/firstPage';
+      window.location.hash = '#/feed';
     })
     .catch((error) => {
       // Handle Errors here.
@@ -108,7 +108,7 @@ export const signIn = (emailInput, passwordInput) => {
       const user = userCredential.user;
       // console.log('Ingresaste');
       // console.log(user);
-      window.location.hash = '#/firstPage';
+      window.location.hash = '#/feed';
       // ...
     })
     .catch((error) => {
