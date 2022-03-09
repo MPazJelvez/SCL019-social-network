@@ -1,5 +1,4 @@
-import { signIn } from '../lib/index.js';
-import { resetPassword } from '../lib/index.js';
+import { signIn, resetPassword } from '../lib/index.js';
 
 export const login = () => {
   window.location.hash = '/login';
@@ -31,14 +30,14 @@ export const login = () => {
    `;
 
   divLogin.querySelector('#login').addEventListener('click', (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const emailInput = document.querySelector('#userEmail').value;
     const passwordInput = document.querySelector('#password').value;
-   signIn(emailInput, passwordInput);
+    signIn(emailInput, passwordInput);
   });
 
   divLogin.querySelector('#resetPassword').addEventListener('click', (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const emailInput = document.querySelector('#userEmail').value;
     resetPassword(emailInput);
   });
