@@ -12,11 +12,14 @@ import {
 } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js';
 
 import { app } from './config-firebase.js';
+import { getFirestore, collection , addDoc, getDocs, onSnapshot} from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js';
 
 const analytics = getAnalytics(app);
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
 const userAuth = auth.currentUser;
+// const db = getFirestore();
+
 
 // Firebase Functions
 export const authGoogle = () => {
@@ -171,3 +174,10 @@ export const logOut = () => {
       // An error happened.
     });
 };
+
+// FIREBASE DATA BASE 
+
+
+// export const createPost = (title, description, image) => {
+//   addDoc(collection(db, 'post'), { title, description, image });
+// };
