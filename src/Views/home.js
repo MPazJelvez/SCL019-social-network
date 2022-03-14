@@ -1,6 +1,6 @@
 import { authGoogle } from '../lib/index.js';
 
-export const home = () => {
+export const home = (firebaseObject) => {
   window.location.hash = '/home';
   const divHome = document.createElement('div');
   divHome.className = 'div';
@@ -16,7 +16,7 @@ export const home = () => {
  `;
 
   divHome.querySelector('#google').addEventListener('click', () => {
-    authGoogle();
+    authGoogle(firebaseObject.auth);
   });
 
   return divHome;

@@ -1,6 +1,4 @@
-import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-analytics.js';
 import {
-  getAuth,
   signInWithPopup,
   GoogleAuthProvider,
   getRedirectResult,
@@ -9,20 +7,21 @@ import {
   sendEmailVerification,
   sendPasswordResetEmail,
   signOut,
-} from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js';
+  doc,
+  collection,
+  addDoc,
+  getDoc,
+  getDocs,
+  onSnapshot,
+} from "./config-firebase.js";
 
-import { app } from './config-firebase.js';
-import { getFirestore, collection , addDoc, getDocs, onSnapshot} from 'https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js';
-
-const analytics = getAnalytics(app);
+// const analytics = getAnalytics(app);
 const provider = new GoogleAuthProvider();
-const auth = getAuth();
-const userAuth = auth.currentUser;
-// const db = getFirestore();
+// const userAuth = auth.currentUser;
 
 
 // Firebase Functions
-export const authGoogle = () => {
+export const authGoogle = (auth) => {
   getRedirectResult(auth);
   signInWithPopup(auth, provider)
     .then((result) => {
@@ -31,7 +30,7 @@ export const authGoogle = () => {
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
-      window.location.hash = '#/feed';
+      window.location.hash = "#/feed";
     })
     .catch((error) => {
       // Handle Errors here.
@@ -46,19 +45,19 @@ export const authGoogle = () => {
     });
 };
 
-export const createUser = (emailInput, passwordInput) => {
+export const createUser = (auth, emailInput, passwordInput) => {
   createUserWithEmailAndPassword(auth, emailInput, passwordInput)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
       // console.log(user);
-      const username = document.querySelector('#user').value;
+      const username = document.querySelector("#user").value;
       user.displayName = username;
       // console.log(username);
-      emailVerification();
-      alert('Revisa tu correo!');
+      emailVerification(auth);
+      alert("Revisa tu correo!");
       // console.log('created');
-      window.location.hash = '#/login';
+      window.location.hash = "#/login";
 
       return user;
     })
@@ -67,81 +66,81 @@ export const createUser = (emailInput, passwordInput) => {
       const errorMessage = error.message;
       // console.log(errorCode + errorMessage);
 
-      const username = document.querySelector('#user').value;
-      const checkbox = document.getElementById('checkbox');
+      const username = document.querySelector("#user").value;
+      const checkbox = document.getElementById("checkbox");
       // span errors
-      const invalidEmail = document.getElementById('invalidEmail');
-      const invalidPassword = document.getElementById('invalidPassword');
-      const missingEmail = document.getElementById('missingEmail');
-      const weakPassword = document.getElementById('weakPassword');
-      const invalidUserName = document.getElementById('invalidUserName');
-      const emailAlreadyUse = document.getElementById('emailAlreadyUse');
-      const agreeTC = document.getElementById('agreeTC');
+      const invalidEmail = document.getElementById("invalidEmail");
+      const invalidPassword = document.getElementById("invalidPassword");
+      const missingEmail = document.getElementById("missingEmail");
+      const weakPassword = document.getElementById("weakPassword");
+      const invalidUserName = document.getElementById("invalidUserName");
+      const emailAlreadyUse = document.getElementById("emailAlreadyUse");
+      const agreeTC = document.getElementById("agreeTC");
       // manejar el input de terminos y condiciones
 
-      if (errorCode === 'auth/missing-email') {
-        missingEmail.classList.toggle('hidden');
+      if (errorCode === "auth/missing-email") {
+        missingEmail.classList.toggle("hidden");
       }
-      if (errorCode === 'auth/invalid-email') {
-        invalidEmail.classList.toggle('hidden');
+      if (errorCode === "auth/invalid-email") {
+        invalidEmail.classList.toggle("hidden");
       }
-      if (errorCode === 'auth/email-already-in-use') {
-        emailAlreadyUse.classList.toggle('hidden');
+      if (errorCode === "auth/email-already-in-use") {
+        emailAlreadyUse.classList.toggle("hidden");
       }
-      if (errorCode === 'auth/internal-error') {
-        invalidPassword.classList.toggle('hidden');
+      if (errorCode === "auth/internal-error") {
+        invalidPassword.classList.toggle("hidden");
       }
-      if (errorCode === 'auth/weak-password') {
-        weakPassword.classList.toggle('hidden');
+      if (errorCode === "auth/weak-password") {
+        weakPassword.classList.toggle("hidden");
       }
-      if (errorCode === 'auth/invalid-display-name' || username === '') {
-        invalidUserName.classList.toggle('hidden');
+      if (errorCode === "auth/invalid-display-name" || username === "") {
+        invalidUserName.classList.toggle("hidden");
       }
       if (!checkbox.checked) {
-        agreeTC.classList.toggle('hidden');
+        agreeTC.classList.toggle("hidden");
       }
     });
   return createUserWithEmailAndPassword;
 };
 
-export const signIn = (emailInput, passwordInput) => {
+export const signIn = (auth, emailInput, passwordInput) => {
   signInWithEmailAndPassword(auth, emailInput, passwordInput)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
       // console.log('Ingresaste');
       // console.log(user);
-      window.location.hash = '#/feed';
+      window.location.hash = "#/feed";
       // ...
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       // console.log(errorCode);
-      window.location.hash = '#/login';
+      window.location.hash = "#/login";
 
-      const emailError = document.getElementById('invalidEmail');
-      const passwordError = document.getElementById('invalidPassword');
-      const completeError = document.getElementById('completeField');
-      const userNotFound = document.getElementById('userNotFound');
+      const emailError = document.getElementById("invalidEmail");
+      const passwordError = document.getElementById("invalidPassword");
+      const completeError = document.getElementById("completeField");
+      const userNotFound = document.getElementById("userNotFound");
 
-      if (errorCode === 'auth/invalid-email') {
-        emailError.classList.toggle('hidden');
+      if (errorCode === "auth/invalid-email") {
+        emailError.classList.toggle("hidden");
       }
-      if (errorCode === 'auth/wrong-password') {
-        passwordError.classList.toggle('hidden');
+      if (errorCode === "auth/wrong-password") {
+        passwordError.classList.toggle("hidden");
       }
-      if (errorCode === 'auth/user-not-found') {
-        userNotFound.classList.toggle('hidden');
+      if (errorCode === "auth/user-not-found") {
+        userNotFound.classList.toggle("hidden");
       }
-      if (errorCode === 'auth/internal-error') {
-        completeError.classList.toggle('hidden');
+      if (errorCode === "auth/internal-error") {
+        completeError.classList.toggle("hidden");
       }
     });
   return signInWithEmailAndPassword;
 };
 
-const emailVerification = () => {
+const emailVerification = (auth) => {
   sendEmailVerification(auth.currentUser).then(() => {
     // console.log('correo enviado');
     // Email verification sent!
@@ -149,7 +148,7 @@ const emailVerification = () => {
   });
 };
 
-export const resetPassword = (email) => {
+export const resetPassword = (auth, email) => {
   sendPasswordResetEmail(auth, email)
     .then(() => {
       // console.log('Correo enviado');
@@ -163,11 +162,11 @@ export const resetPassword = (email) => {
     });
 };
 
-export const logOut = () => {
+export const logOut = (auth) => {
   signOut(auth)
     .then(() => {
-      alert('saliste')
-      window.location.hash = '#/home';
+      alert("saliste");
+      window.location.hash = "#/home";
     })
     .catch((error) => {
       // console.log('aun no haz salido')
@@ -175,9 +174,23 @@ export const logOut = () => {
     });
 };
 
-// FIREBASE DATA BASE 
+// FIREBASE DATA BASE
 
+export const createPost = async ( db, title, description ) => {
+  // addDoc(collection(db, 'post'), { title, description });
+  // const docRef = addDoc(collection(db, 'post'), { title, description });
+  const docRef = await addDoc(collection(db, "post"), {
+    title,
+    description
+  });
+  console.log("Document written with ID: ", docRef.id)
+};
 
-// export const createPost = (title, description, image) => {
-//   addDoc(collection(db, 'post'), { title, description, image });
-// };
+export const getPost = (id) => {
+  addDoc(doc( db, 'post', id ))
+}
+
+export const onGetPost = (callback) => {
+  onSnapshot(collection(db, 'post'), callback )
+}
+

@@ -1,6 +1,6 @@
-import { logOut } from '../lib/index.js';
+import { logOut, createPost, onGetPost, getPost } from '../lib/index.js';
 
-export const feed = () => {
+export const feed = ( firebaseObject ) => {
   window.location.hash = '/feed';
   const divFeed = document.createElement('div');
   divFeed.className = 'div';
@@ -23,24 +23,48 @@ export const feed = () => {
        </form>
        <div id='post-container'></div>
         `;
-
+  const postContainer = divFeed.querySelector('#post-container');
   const postForm = divFeed.querySelector('#post-form');
+
+      
+
+    window.addEventListener('DOMContentLoaded', async (e) => {
+        onGetPost((post)  => {
+            let html = '';
+            post.forEach(doc => {
+                const postId = doc.data();
+                console.log(postId)
+
+                html += `
+                <div>
+                  <h3>${postId.title}</h3>
+                  <p>${postId.description}</p>
+                  <button class='btn-delete' data-id='${doc.id}'>Delete</button>
+                  <button class='btn-edit' data-id='${doc.id}'>Edit</button>
+                </div>
+                `
+            })
+            postContainer.innerHTML = html;
+        })
+
+
+    } )
+
+
+
   // const postContainer = divFeed.querySelector('#post-container');
 
   divFeed.querySelector('#logOut').addEventListener('click', (e) => {
     e.preventDefault();
-    logOut();
+    logOut(firebaseObject.auth);
   });
 
-  postForm.addEventListener('click', (e) => {
+  postForm.addEventListener('submit', (e) => {
     e.preventDefault();
-
     const title = divFeed.querySelector('#title').value;
     const description = divFeed.querySelector('#description').value;
-    console.log(title)
-    console.log(description)
-    // createPost(title, description, image);
-    // postForm.reset();
+    createPost( firebaseObject.db, title, description );
+    postForm.reset();
   });
   
   return divFeed;

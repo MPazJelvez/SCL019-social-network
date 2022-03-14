@@ -1,6 +1,6 @@
 import { signIn, resetPassword } from '../lib/index.js';
 
-export const login = () => {
+export const login = (firebaseObject) => {
   window.location.hash = '/login';
   const divLogin = document.createElement('div');
   divLogin.className = 'div';
@@ -33,13 +33,13 @@ export const login = () => {
     e.preventDefault();
     const emailInput = document.querySelector('#userEmail').value;
     const passwordInput = document.querySelector('#password').value;
-    signIn(emailInput, passwordInput);
+    signIn(firebaseObject.auth , emailInput, passwordInput);
   });
 
   divLogin.querySelector('#resetPassword').addEventListener('click', (e) => {
     e.preventDefault();
     const emailInput = document.querySelector('#userEmail').value;
-    resetPassword(emailInput);
+    resetPassword(firebaseObject.auth, emailInput);
   });
 
   return divLogin;
