@@ -8,7 +8,7 @@ import {
   sendPasswordResetEmail,
   signOut,
   onAuthStateChanged, 
-  
+  onAuthState,
   doc,
   collection,
   addDoc,
@@ -105,22 +105,26 @@ export const createUser = (auth, emailInput, passwordInput) => {
   return createUserWithEmailAndPassword;
 };
 
-  const authState = (auth, user ) =>{
+  
+  const authState = () =>{
   //const auth = getAuth();
   onAuthStateChanged(auth, (user) => {
-    if (user) { 
+    const uid = user.uid;
+    console.log(uid)
+    console.log('auth state true')
+    // if (user) { 
        
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      const uid = user.uid;
-      console.log(uid)
-      return true
-      // ...
-    } else {
-  return false
-      // User is signed out
-      // ...
-    }
+    //   // User is signed in, see docs for a list of available properties
+    //   // https://firebase.google.com/docs/reference/js/firebase.User
+    //   console.log(uid)
+    //   return true
+    //   // ...
+    // } else {
+    //   console.log('auth state false')
+    //   return false
+    //   // User is signed out
+    //   // ...
+    // }
   });
 }
 
@@ -129,14 +133,15 @@ export const signIn = (auth, emailInput, passwordInput) => {
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
-      // console.log('Ingresaste');
-      // console.log(user);
-    if (authState === true ) {
-      window.location.hash = "#/feed"
-    } 
-    else {
-      window.location.hash = "#/login";
-    }
+      
+    // if (authState) {
+    //   console.log('es true')
+    //   window.location.hash = "#/feed"
+    // } 
+    // else {
+    //   console.log('es false')
+    //   window.location.hash = "#/login";
+    // }
 
       // ...
     })
