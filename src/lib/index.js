@@ -7,6 +7,8 @@ import {
   sendEmailVerification,
   sendPasswordResetEmail,
   signOut,
+  onAuthStateChanged, 
+  
   doc,
   collection,
   addDoc,
@@ -17,7 +19,7 @@ import {
 
 // const analytics = getAnalytics(app);
 const provider = new GoogleAuthProvider();
-// const userAuth = auth.currentUser;
+//const userAuth = auth.currentUser;
 
 
 // Firebase Functions
@@ -103,6 +105,25 @@ export const createUser = (auth, emailInput, passwordInput) => {
   return createUserWithEmailAndPassword;
 };
 
+  const authState = (auth, user ) =>{
+  //const auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if (user) { 
+       
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      const uid = user.uid;
+      console.log(uid)
+      return true
+      // ...
+    } else {
+  return false
+      // User is signed out
+      // ...
+    }
+  });
+}
+
 export const signIn = (auth, emailInput, passwordInput) => {
   signInWithEmailAndPassword(auth, emailInput, passwordInput)
     .then((userCredential) => {
@@ -110,7 +131,13 @@ export const signIn = (auth, emailInput, passwordInput) => {
       const user = userCredential.user;
       // console.log('Ingresaste');
       // console.log(user);
-      window.location.hash = "#/feed";
+    if (authState === true ) {
+      window.location.hash = "#/feed"
+    } 
+    else {
+      window.location.hash = "#/login";
+    }
+
       // ...
     })
     .catch((error) => {
@@ -147,6 +174,7 @@ const emailVerification = (auth) => {
     // ...
   });
 };
+
 
 export const resetPassword = (auth, email) => {
   sendPasswordResetEmail(auth, email)
