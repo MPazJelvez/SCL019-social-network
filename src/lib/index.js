@@ -8,7 +8,6 @@ import {
   sendPasswordResetEmail,
   signOut,
   onAuthStateChanged, 
-  onAuthState,
   doc,
   collection,
   addDoc,
@@ -113,7 +112,7 @@ export const createUser = (auth, emailInput, passwordInput) => {
     console.log(uid)
     console.log('auth state true')
     // if (user) { 
-       
+        
     //   // User is signed in, see docs for a list of available properties
     //   // https://firebase.google.com/docs/reference/js/firebase.User
     //   console.log(uid)
@@ -220,10 +219,13 @@ export const createPost = async ( db, title, description ) => {
 };
 
 export const getPost = (id) => {
-  addDoc(doc( db, 'post', id ))
+  addDoc(doc(db, 'post', id ))
 }
 
 export const onGetPost = (callback) => {
   onSnapshot(collection(db, 'post'), callback )
 }
 
+export const getPosts = (db, post) => {
+getDocs(collection(db, post))
+}
