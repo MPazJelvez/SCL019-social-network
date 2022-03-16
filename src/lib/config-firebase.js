@@ -1,27 +1,4 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-  getRedirectResult,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  sendEmailVerification,
-  sendPasswordResetEmail,
-  signOut,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js";
-
-import {
-  getFirestore,
-  collection,
-  doc,
-  addDoc,
-  getDoc,
-  getDocs,
-  onSnapshot,
-} from "https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js";
-
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -40,26 +17,5 @@ const firebaseConfig = {
 // Initialize Firebase
 export function appInit() {
   const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore();
-  console.log(db)
-  return { app, auth, db };
+  return { app };
 }
-
-export {
-  signInWithPopup,
-  GoogleAuthProvider,
-  getRedirectResult,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  sendEmailVerification,
-  sendPasswordResetEmail,
-  signOut,
-  onAuthStateChanged,
-  collection,
-  addDoc,
-  getDocs,
-  onSnapshot,
-  getDoc,
-  doc
-};

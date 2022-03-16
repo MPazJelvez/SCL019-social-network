@@ -1,6 +1,6 @@
 import { createUser } from '../lib/index.js';
 
-export const register = (firebaseObject) => {
+export const register = () => {
   window.location.hash = '/register';
   const divRegister = document.createElement('div');
   divRegister.className = 'div';
@@ -45,7 +45,9 @@ export const register = (firebaseObject) => {
     e.preventDefault();
     const emailInput = document.querySelector('#email').value;
     const passwordInput = document.querySelector('#password').value;
-    createUser(firebaseObject.auth , emailInput, passwordInput);
+    const userInput = document.querySelector('#user').value;
+    console.log(userInput);
+    createUser(emailInput, passwordInput, userInput);
   });
 
   return divRegister;
