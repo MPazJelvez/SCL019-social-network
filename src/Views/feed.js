@@ -1,9 +1,9 @@
-import { logOut, createPost, onGetPost, getPost } from '../lib/index.js';
-import { collection, getDocs} from '../lib/config-firebase.js'
+import { logOut, createPost, onGetPost, getPost, deletePost } from '../lib/index.js';
 
-export const feed = ( firebaseObject ) => {
+export const feed = () => {
   window.location.hash = '/feed';
   const divFeed = document.createElement('div');
+  let id = '';
   divFeed.className = 'div';
   divFeed.innerHTML = ` 
   
@@ -28,54 +28,65 @@ export const feed = ( firebaseObject ) => {
   const postForm = divFeed.querySelector('#post-form');
 
       
-
-    window.addEventListener('DOMContentLoaded', async (e) => {
-        onGetPost((post)  => {
-            let html = '';
-            post.forEach(doc => {
-                const postId = doc.data();
-                console.log(postId)
-
-                html += `
-                <div>
-                  <h3>${postId.title}</h3>
-                  <p>${postId.description}</p>
-                  <button class='btn-delete' data-id='${doc.id}'>Delete</button>
-                  <button class='btn-edit' data-id='${doc.id}'>Edit</button>
-                </div>
-                `
-            })
-            postContainer.innerHTML = html;
-        })
-
-
-    } )
-
-
-
-  // const postContainer = divFeed.querySelector('#post-container');
-
   divFeed.querySelector('#logOut').addEventListener('click', (e) => {
     e.preventDefault();
-    logOut(firebaseObject.auth);
+    logOut();
   });
 
   postForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const title = divFeed.querySelector('#title').value;
     const description = divFeed.querySelector('#description').value;
-    createPost( firebaseObject.db, title, description );
+    createPost(title, description );
     postForm.reset();
   });
   
   const postBtn = divFeed.querySelector('#post-btn');
 postBtn.addEventListener('click', async (e) => {
-  // const post = getPosts(collection(firebaseObject.db, 'post'));
-  const post =  await getDocs(collection(firebaseObject.db, 'post'));
-  console.log(post)
-  postContainer.innerHTML = post;
+  console.log('holi')
+  });
 
-});
+  if (divFeed != '') {
+    let postStructure = '';
+    onGetPost(post => {
+      post.forEach(doc => {
+        const posts = doc.data();
+        // console.log(posts)
+
+        postStructure += `
+        <div class='post'>
+          <p>${posts.userName}</p>
+          <h3>${posts.title}</h3>
+          <hr/>
+          <p>${posts.description}</p>
+          <p>${posts.id}</p>
+          <button class='btn-delete' data-id='${doc.id}'>Delete</button>
+          <button class='btn-edit' data-id='${doc.id}'>Edit</button>          
+        </div>
+        `
+      }); 
+
+      postContainer.innerHTML = postStructure;
+      // console.log(postContainer.innerHTML = postStructure);
+
+
+      const btnDelete = postContainer.querySelectorAll('.btn-delete');
+      // console.log(btnDelete);
+      btnDelete.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          id = e.target.dataset.id;
+          console.log(id);
+        deletePost(id);
+        console.log(deletePost(id), id);
+        })
+      })
+
+    });
+
+    
+  };
+
+
 
   return divFeed;
 };

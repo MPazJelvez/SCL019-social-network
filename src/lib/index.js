@@ -1,4 +1,5 @@
 import {
+  getAuth,
   signInWithPopup,
   GoogleAuthProvider,
   getRedirectResult,
@@ -7,22 +8,31 @@ import {
   sendEmailVerification,
   sendPasswordResetEmail,
   signOut,
-  onAuthStateChanged, 
-  doc,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js";
+
+import {
+  getFirestore,
   collection,
+  doc,
   addDoc,
   getDoc,
   getDocs,
   onSnapshot,
-} from "./config-firebase.js";
+  deleteDoc
+} from "https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js";
+import { appInit } from "./config-firebase.js";
 
 // const analytics = getAnalytics(app);
+const initApp = appInit();
+const auth = getAuth();
+const db = getFirestore();
 const provider = new GoogleAuthProvider();
-//const userAuth = auth.currentUser;
+const userAuth = auth.currentUser;
 
 
 // Firebase Functions
-export const authGoogle = (auth) => {
+export const authGoogle = () => {
   getRedirectResult(auth);
   signInWithPopup(auth, provider)
     .then((result) => {
@@ -46,17 +56,15 @@ export const authGoogle = (auth) => {
     });
 };
 
-export const createUser = (auth, emailInput, passwordInput) => {
-  createUserWithEmailAndPassword(auth, emailInput, passwordInput)
+export const createUser = (emailInput, passwordInput, userInput) => {
+  createUserWithEmailAndPassword(auth, emailInput, passwordInput, userInput)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
-      // console.log(user);
-      const username = document.querySelector("#user").value;
-      user.displayName = username;
-      // console.log(username);
       emailVerification(auth);
       alert("Revisa tu correo!");
+      userInput = auth.currentUser.displayName;      
+      console.log(userInput);
       // console.log('created');
       window.location.hash = "#/login";
 
@@ -127,15 +135,16 @@ export const createUser = (auth, emailInput, passwordInput) => {
   });
 }
 
-export const signIn = (auth, emailInput, passwordInput) => {
+export const signIn = (emailInput, passwordInput) => {
   signInWithEmailAndPassword(auth, emailInput, passwordInput)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
+      console.log(user);
       
     // if (authState) {
     //   console.log('es true')
-    //   window.location.hash = "#/feed"
+      window.location.hash = "#/feed"
     // } 
     // else {
     //   console.log('es false')
@@ -171,7 +180,7 @@ export const signIn = (auth, emailInput, passwordInput) => {
   return signInWithEmailAndPassword;
 };
 
-const emailVerification = (auth) => {
+const emailVerification = () => {
   sendEmailVerification(auth.currentUser).then(() => {
     // console.log('correo enviado');
     // Email verification sent!
@@ -180,7 +189,7 @@ const emailVerification = (auth) => {
 };
 
 
-export const resetPassword = (auth, email) => {
+export const resetPassword = (email) => {
   sendPasswordResetEmail(auth, email)
     .then(() => {
       // console.log('Correo enviado');
@@ -194,7 +203,7 @@ export const resetPassword = (auth, email) => {
     });
 };
 
-export const logOut = (auth) => {
+export const logOut = () => {
   signOut(auth)
     .then(() => {
       alert("saliste");
@@ -208,12 +217,21 @@ export const logOut = (auth) => {
 
 // FIREBASE DATA BASE
 
-export const createPost = async ( db, title, description ) => {
-  // addDoc(collection(db, 'post'), { title, description });
-  // const docRef = addDoc(collection(db, 'post'), { title, description });
+export const createPost = async (title, description ) => {
+  let userName;
+    // si el usuario se registró sin google (es decir no se guardó su displayName)
+    // al momento de crear el post
+    // su nombre será el email.
+    if (auth.currentUser.displayName === null) {
+      userName = auth.currentUser.email;
+    } else {
+      userName = auth.currentUser.displayName;
+    };
+  
   const docRef = await addDoc(collection(db, "post"), {
     title,
-    description
+    description,
+    userName,
   });
   console.log("Document written with ID: ", docRef.id)
 };
@@ -226,6 +244,10 @@ export const onGetPost = (callback) => {
   onSnapshot(collection(db, 'post'), callback )
 }
 
-export const getPosts = (db, post) => {
-getDocs(collection(db, post))
+export const getPosts = (callback) => {
+onSnapshot(collection(db, 'post'), callback)
+}
+
+export const deletePost = id => {
+  deleteDoc(doc(db, 'post', id));
 }
