@@ -1,5 +1,7 @@
 
 
+
+
 import { logOut, createPost, onGetPost, getPost, deletePost } from '../lib/index.js';
 
 export const feed = () => {
@@ -49,8 +51,9 @@ postBtn.addEventListener('click', async (e) => {
   console.log('holi')
   });
 
-  let postStructure = '';
   if (divFeed != '') {
+    postContainer.innerHTML ='';
+    let postStructure = '';
     onGetPost(post => {
       post.forEach(doc => {
         const posts = doc.data();
@@ -76,12 +79,12 @@ postBtn.addEventListener('click', async (e) => {
       const btnDelete = postContainer.querySelectorAll('.btn-delete');
       console.log(btnDelete);
       btnDelete.forEach(btn => {
-        btn.addEventListener('click', (e) => {
+        btn.addEventListener('click',  (e) => {
 
           //console.log(btn)
         id = e.target.dataset.id;
           //console.log(id);
-       deletePost(id)
+        deletePost(id)
       // postContainer.innerHTML =''
       //   onGetPost(post => {
       //     post.forEach(doc => {

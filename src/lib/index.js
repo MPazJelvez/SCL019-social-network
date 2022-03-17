@@ -242,17 +242,17 @@ export const getPost = (id) => {
    addDoc(doc(db, 'post', id ))
 }
 
-export const deletePost = async (id) =>{
-  await deleteDoc(doc(db, 'post', id));
-}
+
 
 export const onGetPost = (callback) => {
   onSnapshot(collection(db, 'post'), callback )
 }
 
-// export const getPosts = (callback) => {
-// onSnapshot(collection(db, 'post'), callback)
-// }
+export const getPosts = (callback) => {
+onSnapshot(collection(db, 'post'), callback)
+}
 
-  
+export const deletePost =  id =>{
+  deleteDoc(doc(db, 'post', id));
+} 
 
