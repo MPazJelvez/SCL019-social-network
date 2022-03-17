@@ -23,6 +23,7 @@ export const feed = () => {
           <!-- <label for='image'> Inserta una Imagen </label> -->
           <!-- <input type='file' id='image' name='image'> -->
           <button id='post-btn'>Postear</button>
+          <button id=''>probando</button>
         </form>
         <div id='post-container'></div>
         `;
