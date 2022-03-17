@@ -55,11 +55,10 @@ postBtn.addEventListener('click', async (e) => {
 
         postStructure += `
         <div class='post'>
-          <p>${posts.userName}</p>
+        <hr/>
+          <p>username: <b>${posts.userName}</b></p>
           <h3>${posts.title}</h3>
-          <hr/>
           <p>${posts.description}</p>
-          <p>${posts.id}</p>
           <button class='btn-delete' data-id='${doc.id}'>Delete</button>
           <button class='btn-edit' data-id='${doc.id}'>Edit</button>          
         </div>
