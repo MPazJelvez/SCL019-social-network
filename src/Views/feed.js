@@ -1,3 +1,5 @@
+
+
 import { logOut, createPost, onGetPost, getPost, deletePost } from '../lib/index.js';
 
 export const feed = () => {
@@ -46,8 +48,8 @@ postBtn.addEventListener('click', async (e) => {
   console.log('holi')
   });
 
+  let postStructure = '';
   if (divFeed != '') {
-    let postStructure = '';
     onGetPost(post => {
       post.forEach(doc => {
         const posts = doc.data();
@@ -67,19 +69,42 @@ postBtn.addEventListener('click', async (e) => {
 
       postContainer.innerHTML = postStructure;
       // console.log(postContainer.innerHTML = postStructure);
+    
 
 
       const btnDelete = postContainer.querySelectorAll('.btn-delete');
-      // console.log(btnDelete);
+      console.log(btnDelete);
       btnDelete.forEach(btn => {
         btn.addEventListener('click', (e) => {
-          id = e.target.dataset.id;
-          console.log(id);
-        deletePost(id);
-        console.log(deletePost(id), id);
-        })
-      })
 
+          //console.log(btn)
+        id = e.target.dataset.id;
+          //console.log(id);
+       deletePost(id)
+      // postContainer.innerHTML =''
+      //   onGetPost(post => {
+      //     post.forEach(doc => {
+      //       const posts = doc.data();
+      //       // console.log(posts)
+    
+      //       postStructure += `
+      //       <div class='post'>
+      //       <hr/>
+      //         <p>username: <b>${posts.userName}</b></p>
+      //         <h3>${posts.title}</h3>
+      //         <p>${posts.description}</p>
+      //         <button class='btn-delete' data-id='${doc.id}'>Delete</button>
+      //         <button class='btn-edit' data-id='${doc.id}'>Edit</button>          
+      //       </div>
+      //       `
+      //     }); 
+    
+      //     postContainer.innerHTML = postStructure;
+
+      //   //console.log(deletePost(id), id);
+        // })
+      })
+    })
     });
 
     

@@ -21,6 +21,7 @@ import {
   onSnapshot,
   deleteDoc
 } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js";
+
 import { appInit } from "./config-firebase.js";
 
 // const analytics = getAnalytics(app);
@@ -244,10 +245,12 @@ export const onGetPost = (callback) => {
   onSnapshot(collection(db, 'post'), callback )
 }
 
-export const getPosts = (callback) => {
-onSnapshot(collection(db, 'post'), callback)
-}
+// export const getPosts = (callback) => {
+// onSnapshot(collection(db, 'post'), callback)
+// }
 
-export const deletePost = id => {
-  deleteDoc(doc(db, 'post', id));
+export const deletePost = async (id) =>{
+  await deleteDoc(doc(db, 'post', id));
 }
+  
+
