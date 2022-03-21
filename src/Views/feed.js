@@ -47,7 +47,7 @@ export const feed = () => {
           
           postStructure += `
           <div class='post'>
-          <p>username: <b>${posts.userName}</b></p>
+          <p>${posts.userName}</p>
           <h3>${posts.title}</h3>
           <p>${posts.description}</p>
           <div>
