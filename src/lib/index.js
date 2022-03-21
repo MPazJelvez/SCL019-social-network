@@ -31,6 +31,8 @@ export const auth = getAuth();
 //const db = getFirestore();
 const provider = new GoogleAuthProvider();
 const userAuth = auth.currentUser;
+export const userNameTest = auth.currentUser
+console.log(userNameTest)
 
 
 // Firebase Functions
