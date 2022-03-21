@@ -71,7 +71,13 @@ export const feed = () => {
             //console.log(btn)
             id = e.target.dataset.id;
             //console.log(id);
+            const deleteAlert = confirm('¿Estas seguro que quieres eliminar este post?')
+              if(deleteAlert == true){
             deletePost(id)
+            alert('se borro tu post')
+          }else{
+            alert('post no eliminado!')
+          }
            
               })
             })
