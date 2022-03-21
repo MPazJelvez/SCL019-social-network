@@ -13,6 +13,8 @@
   --second:#f9f9f9;
   --third:#CDF0EA;
   --fourth:#BEAEE2;
+  --fifth: #F1BDE4;
+  --sixth: #C0BCBC;
   --font:'Nunito Sans';
   --bold:800px;
   --regular:600px;
@@ -30,6 +32,12 @@
   text-align: center;
   border-radius: 10px;
   border:var(--primary) 1px solid; 
+}
+
+.btn-edit, .btn-delete{
+  padding: .5rem 1rem;
+  margin-top: 1rem;
+
 }
 
 
@@ -247,7 +255,7 @@ height:1rem ;
 .post-form {
   display: grid;
   grid-template-columns:repeat(1, 15rem) ;
-  grid-template-rows:  1rem , 2rem, 1rem, 4rem, 2rem, 2rem;
+  grid-template-rows: 1rem , 2rem, 1rem, 4rem, 2rem, 2rem;
   row-gap: 1rem;
   align-items: center;
   justify-content: center;
@@ -255,7 +263,7 @@ height:1rem ;
 }
 .post-form > textarea, input {
   text-align: center;
-  align-content: center;
+  align-content: center; 
   border-radius: 10px;
   border:var(--primary) 1px solid;
   padding: .5rem 1rem;
@@ -263,18 +271,105 @@ height:1rem ;
   width: 100%; 
 }
 .post{
-  display: grid;
+  /* display: grid; */
   grid-template-columns:repeat(1, 20rem) ;
-  grid-template-rows:  1rem , 2rem, 3rem, 2rem;
+  /* grid-template-rows:  1rem , 2rem, 3rem, 2rem; */
+  text-align: center;
   align-items: center;
   justify-content: center;
-  margin: 3rem auto;
+  margin: 2rem auto;
   width: 100%;
+  padding-top: 2rem;
 }
+
+.post > h3{
+  color: var(--primary);
+  font-size: bold;
+  text-transform: var(--light);
+}
+
+.user-name{
+  color: var(--primary);
+}
+
+.post-border{
+  background-color: white;
+  /* padding: 3rem; */
+  border-radius: 10px;
+  margin: 1rem auto ;
+  box-shadow:  7px 7px 11px var(--fourth); 
+
+}
+
 .post-container{
-  margin:2rem auto ;
-  display: flex;
+  margin: 1rem auto ;
+  /* display: flex; */
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  width: 50vh;
+}
+
+.likes-border{
+  display: flex;
+  align-items: center;
+  border-radius: 0px 0px 10px 10px;
+  height: 2rem;
+  background-color: var(--fifth);
+}
+
+.btn-like{
+  background-color: transparent;
+  outline: none;
+  border: none;
+  margin: .3rem .5rem;
+  cursor: pointer;
+
+}
+
+.btn-like > svg {
+  color: var(--primary);
+}
+
+.logOut-container{
+  display: flex;
+  width: 100%;
+  justify-content: end;
+  align-items: center;
+}
+
+.logOut{
+ margin: auto 2rem;
+ font-weight: bold;
+ color: var(--primary);
+}
+
+.user-container{
+  max-width: max-content;
+  font-size: small;
+  margin-left: 1rem;
+}
+
+.info{
+  font-size: small;
+  text-align: left;
+  margin-left: 1rem;
+  color: var(--sixth);
+}
+
+.info-container{
+  margin: 1rem auto;
+}
+
+.post-open-container{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.post-open{
+  background-color:var(--primary);
+  color:white;
+  border:white 1px solid; 
 }

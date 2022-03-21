@@ -16,11 +16,7 @@ import { auth } from "./index.js";
   
 const db = getFirestore();
 
-
-
-
-
-export const createPost = (title,description) => {
+export const createPost = (title,description, price, materials) => {
     let userName;
       // si el usuario se registró sin google (es decir no se guardó su displayName)
       // al momento de crear el post
@@ -30,7 +26,13 @@ export const createPost = (title,description) => {
       } else {
         userName = auth.currentUser.displayName;
       };
-    addDoc(collection(db, 'post'), {title, description, userName})
+    addDoc(collection(db, 'post'), {
+      title, 
+      description, 
+      userName,
+      price,
+      materials
+    })
     
 }
 
