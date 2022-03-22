@@ -8,9 +8,13 @@ import {
     getDocs,
     onSnapshot,
     deleteDoc,
-    updateDoc
+    updateDoc,
+    arrayRemove, 
+    arrayUnion,
+    Timestamp
 
   } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js";
+
 
 import { auth } from "./index.js";
   
@@ -31,7 +35,11 @@ export const createPost = (title,description, price, materials) => {
       description, 
       userName,
       price,
-      materials
+      materials, 
+      userId:auth.currentUser.uid,
+      like:[],
+      numberLike:0,
+      date:Date(Date.now()),
     })
     
 }
@@ -56,3 +64,23 @@ export const createPost = (title,description, price, materials) => {
 
   export const editPost = (id, newDescription) => 
   updateDoc(doc(db,'post', id) , newDescription)
+
+  //dar like a post
+  export const likePost = async (id, userId)=>{
+   const postRef = doc(db,'post',id);
+   const docLike = await getDoc(postRef);
+   const dataLike = docLike.data();
+  console.log(dataLike)
+   const likesCount = dataLike.numberLike;
+   if((dataLike.like).includes(userId)){
+    await updateDoc(postRef,{
+like:arrayRemove(userId),
+numberLike: likesCount  -1,
+    });
+   }else{
+     await updateDoc(postRef,{
+      like:arrayUnion(userId),
+      numberLike: likesCount  +1,
+     });
+   }
+  }
