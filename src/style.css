@@ -349,6 +349,12 @@ height:1rem ;
   font-size: small;
   margin-left: 1rem;
 }
+.date{
+  text-align: left;
+  color: var(--primary);
+  font-size:xx-small;
+  margin-left: 1rem;
+}
 
 .info{
   font-size: small;
