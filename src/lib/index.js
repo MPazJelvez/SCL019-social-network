@@ -31,8 +31,8 @@ export const auth = getAuth();
 //const db = getFirestore();
 const provider = new GoogleAuthProvider();
 const userAuth = auth.currentUser;
-export const userNameTest = auth.currentUser
-console.log(userNameTest)
+// export const userNameTest = auth.currentUser
+// console.log(userNameTest)
 
 
 // Firebase Functions
@@ -218,43 +218,4 @@ export const logOut = () => {
       // An error happened.
     });
 };
-
-// FIREBASE DATA BASE
-
-export const createPost = async (title, description ) => {
-  let userName;
-    // si el usuario se registró sin google (es decir no se guardó su displayName)
-    // al momento de crear el post
-    // su nombre será el email.
-    if (auth.currentUser.displayName === null) {
-      userName = auth.currentUser.email;
-    } else {
-      userName = auth.currentUser.displayName;
-    };
-  
-  const docRef = await addDoc(collection(db, "post"), {
-    title,
-    description,
-    userName,
-  });
-  console.log("Document written with ID: ", docRef.id)
-};
-
-export const getPost = (id) => {
-   addDoc(doc(db, 'post', id ))
-}
-
-
-
-export const onGetPost = (callback) => {
-  onSnapshot(collection(db, 'post'), callback )
-}
-
-export const getPosts = (callback) => {
-onSnapshot(collection(db, 'post'), callback)
-}
-
-export const deletePost =  id =>{
-  deleteDoc(doc(db, 'post', id));
-} 
 

@@ -1,14 +1,16 @@
 
 
 
-import { logOut} from '../lib/index.js';
-import { createPost, onGetPost, getPost, deletePost, editPost } from '../lib/firestore.js'
-
+import { logOut, auth} from '../lib/index.js';
+import { createPost, onGetPost, getPost, deletePost, editPost, likePost } from '../lib/firestore.js'
+import { featured } from './featured.js'
 
 export const feed = () => {
   window.location.hash = '/feed';
   const divFeed = document.createElement('div');
+  featured();
   let id = '';
+
   divFeed.className = 'div';
   divFeed.innerHTML = ` 
   
@@ -56,12 +58,16 @@ export const feed = () => {
         let postStructure = '';
         post.forEach(doc => {
           const posts = doc.data();
+
           // console.log(posts)
           
           postStructure += `
           <div class="post-border">
             <div class='post'>
-            <p class="user-container"> <i class="user-name">${posts.userName}</i> dijo: </p>
+            <span class="date">${posts.date}</span> <br>
+            <p class="user-container">
+              
+            <i class="user-name">${posts.userName}</i> dijo: </p>
             <h3>${posts.title}</h3>
             <p>${posts.description}</p>
             <div>
@@ -74,10 +80,10 @@ export const feed = () => {
             </div>
             </div>
             <div class="likes-border"> 
-              <button id="btn-like" class="btn-like">
+              <button  class="btn-like" value=${doc.id}>
             <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10s10-4.486 10-10S17.514 2 12 2zm4.186 10.74L12 16.926L7.814 12.74a2.745 2.745 0 0 1 0-3.907a2.745 2.745 0 0 1 3.906 0l.28.279l.279-.279a2.745 2.745 0 0 1 3.906 0a2.745 2.745 0 0 1 .001 3.907z"/></svg> 
-              </button>
-            <span id="like-count" class="like-count">3</span> 
+            </button>
+            <span id="like-count" class="like-count"> ${posts.numberLike}Me gusta</span> 
             </div>
             </div>
           `
@@ -131,8 +137,26 @@ export const feed = () => {
           });
         
         })
-          
+       
+        
+        //dar like a los post
+        const btnLike = postContainer.querySelectorAll('.btn-like');
+        console.log(btnLike);
+        btnLike.forEach((like) => {
+          console.log(btnLike);
+          like.addEventListener('click', () => {
+          // id = e.target.dataset.id;
+            console.log('ola');
+            //const idLike = e.target.dataset.id;
+            const userId =auth.currentUser.uid;
+            likePost(like.value, userId);
+            console.log(id);
+          });
+        });
+
       });
+
+
     }  
         postForm.addEventListener('submit', (e) => {
           e.preventDefault();
