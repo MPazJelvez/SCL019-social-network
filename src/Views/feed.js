@@ -70,7 +70,7 @@ export const feed = () => {
             <p class='info'><b>Material:</b> ${posts.materials}</p>
             </div>
             <button class='btn-delete btn' data-id='${doc.id}'>Delete</button>
-            <a href="#post-form"><button class='btn-edit btn' data-id='${doc.id}'>Edit</button></a>          
+            <button class='btn-edit btn' data-id='${doc.id}'>Edit</button>       
             </div>
             </div>
             <div class="likes-border"> 
@@ -112,6 +112,7 @@ export const feed = () => {
         const btnEdit = divFeed.querySelectorAll('.btn-edit');
        btnEdit.forEach( btn => {
         btn.addEventListener('click',async (e) => {
+          divFeed.querySelector('#form-container').classList.toggle("hidden");
           const doc = await getPost(e.target.dataset.id)
           console.log(doc)
           const task = doc.data();
