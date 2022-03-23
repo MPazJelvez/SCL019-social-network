@@ -379,3 +379,13 @@ height:1rem ;
   color:white;
   border:white 1px solid; 
 }
+
+.featured-container{
+  display: flex;
+  justify-content: space-around;
+  width: max-content;
+}
+.featured-img{
+  width: 5rem;
+  border-radius: 50%;
+}

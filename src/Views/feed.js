@@ -14,19 +14,19 @@ export const feed = () => {
 
   divFeed.className = 'div';
   divFeed.innerHTML = ` 
-  <div>
+  <div class="featured-container">
   <a href="https://www.instagram.com/blondieamigurumis/
-  "><img src="../assets/image/blondieamigurumis.jpeg"/> </a>
+  "><img src="../assets/image/blondieamigurumis.jpeg" class="featured-img"/> </a>
   <a href="https://www.instagram.com/p.ink.u/
-  "><img src="../assets/image/Gaby.png"/> </a>
+  "><img src="../assets/image/Gaby.png" class="featured-img"/> </a>
   <a href="https://www.instagram.com/guatitademanzana/
-  "><img src="../assets/image/guatita-manzana.png"/></a>
+  "><img src="../assets/image/guatita-manzana.png" class="featured-img"/></a>
   <a href="https://www.instagram.com/galeriadigiuli/
-  "><img src="../assets/image/Guili.jpg"/></a>
+  "><img src="../assets/image/Guili.jpg" class="featured-img"/></a>
   <a href="https://www.instagram.com/pickleisis/
-  "><img src="../assets/image/Pandora.jpeg"/></a>
+  "><img src="../assets/image/Pandora.jpeg" class="featured-img"/></a>
   <a href="https://www.instagram.com/tallerquemonono/
-  "><img src="../assets/image/tallerquemonono.jpg"/></a>
+  "><img src="../assets/image/tallerquemonono.jpg" class="featured-img"/></a>
   </div>
       <h1 class ="login-title"> Feed </h1>
       <div class='logOut-container'>
@@ -79,7 +79,7 @@ export const feed = () => {
           postStructure += `
           <div class="post-border">
             <div class='post'>
-            <span class="date">${posts.date}</span> <br>
+            <span class="date">${posts.date}</span><br>
             <p class="user-container">
               
             <i class="user-name">${posts.userName}</i> dijo: </p>
