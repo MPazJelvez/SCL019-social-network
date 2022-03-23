@@ -20,6 +20,7 @@ export const featured = () => {
     "><img src="../assets/image/tallerquemonono.jpg"/></a>
     </div>
     `
+    console.log('featured')
     
     return divFeatured;
 }

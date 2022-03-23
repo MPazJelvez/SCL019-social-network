@@ -2,8 +2,9 @@
 
 
 import { logOut, auth} from '../lib/index.js';
-import { createPost, onGetPost, getPost, deletePost, editPost, likePost } from '../lib/firestore.js'
+import { createPost, onGetPost, getPost, deletePost, editPost, likePost, db } from '../lib/firestore.js'
 import { featured } from './featured.js'
+import {  } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js";
 
 export const feed = () => {
   window.location.hash = '/feed';
@@ -13,7 +14,20 @@ export const feed = () => {
 
   divFeed.className = 'div';
   divFeed.innerHTML = ` 
-  
+  <div>
+  <a href="https://www.instagram.com/blondieamigurumis/
+  "><img src="../assets/image/blondieamigurumis.jpeg"/> </a>
+  <a href="https://www.instagram.com/p.ink.u/
+  "><img src="../assets/image/Gaby.png"/> </a>
+  <a href="https://www.instagram.com/guatitademanzana/
+  "><img src="../assets/image/guatita-manzana.png"/></a>
+  <a href="https://www.instagram.com/galeriadigiuli/
+  "><img src="../assets/image/Guili.jpg"/></a>
+  <a href="https://www.instagram.com/pickleisis/
+  "><img src="../assets/image/Pandora.jpeg"/></a>
+  <a href="https://www.instagram.com/tallerquemonono/
+  "><img src="../assets/image/tallerquemonono.jpg"/></a>
+  </div>
       <h1 class ="login-title"> Feed </h1>
       <div class='logOut-container'>
         <a href="" id="logOut" class="logOut"> Salir 
@@ -53,6 +67,7 @@ export const feed = () => {
   });
 
     if (divFeed != '') {
+      
       onGetPost((post) => {
         postContainer.innerHTML ='';
         let postStructure = '';
@@ -118,6 +133,7 @@ export const feed = () => {
         const btnEdit = divFeed.querySelectorAll('.btn-edit');
        btnEdit.forEach( btn => {
         btn.addEventListener('click',async (e) => {
+          window.scrollTo({ top: 0, behavior: 'smooth' })
           divFeed.querySelector('#form-container').classList.toggle("hidden");
           const doc = await getPost(e.target.dataset.id)
           console.log(doc)

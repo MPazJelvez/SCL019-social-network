@@ -11,20 +11,24 @@ import {
     updateDoc,
     arrayRemove, 
     arrayUnion,
-    Timestamp
+    query, orderBy
 
   } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js";
 
 
 import { auth } from "./index.js";
   
-const db = getFirestore();
+export const db = getFirestore();
 
 export const createPost = (title,description, price, materials) => {
     let userName;
       // si el usuario se registró sin google (es decir no se guardó su displayName)
       // al momento de crear el post
       // su nombre será el email.
+      // const q = query(collection(db, "post"), orderBy("date","desc"));
+      // onSnapshot (q, (querySnapshot) => {
+      // querySnapshot.forEach(doc => {
+        // console.log(doc)
       if (auth.currentUser.displayName === null) {
         userName = auth.currentUser.email;
       } else {
@@ -40,8 +44,9 @@ export const createPost = (title,description, price, materials) => {
       like:[],
       numberLike:0,
       date:Date(Date.now()),
-    })
-    
+        })
+    // });
+  // });
 }
 
 
