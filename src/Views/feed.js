@@ -12,17 +12,17 @@ export const feed = () => {
     <div class="featured">
     <h1 class ="destacados"> Destacados </h1>
   <a href="https://www.instagram.com/blondieamigurumis/
-  "><img src="../../assets/image/blondieamigurumis.jpeg" class="featured-img"/> </a>
+  "><img src="assets/image/blondieamigurumis.jpeg" class="featured-img"/> </a>
   <a href="https://www.instagram.com/p.ink.u/
-  "><img src="../../assets/image/Gaby.png" class="featured-img"/> </a>
+  "><img src="assets/image/Gaby.png" class="featured-img"/> </a>
   <a href="https://www.instagram.com/guatitademanzana/
-  "><img src="../../assets/image/guatita-manzana.png" class="featured-img"/></a>
+  "><img src="assets/image/guatita-manzana.png" class="featured-img"/></a>
   <a href="https://www.instagram.com/galeriadigiuli/
-  "><img src="../../assets/image/Guili.jpg" class="featured-img"/></a>
+  "><img src="assets/image/Guili.jpg" class="featured-img"/></a>
   <a href="https://www.instagram.com/pickleisis/
-  "><img src="../../assets/image/Pandora.jpeg" class="featured-img"/></a>
+  "><img src="assets/image/Pandora.jpeg" class="featured-img"/></a>
   <a href="https://www.instagram.com/tallerquemonono/
-  "><img src="../../assets/image/tallerquemonono.jpg" class="featured-img"/></a>
+  "><img src="assets/image/tallerquemonono.jpg" class="featured-img"/></a>
   </div>
   </div>
       <h1 class ="login-title"> Feed </h1>
