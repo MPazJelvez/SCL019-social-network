@@ -11,28 +11,12 @@ import {
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js";
 
-import {
-  getFirestore,
-  collection,
-  doc,
-  addDoc,
-  getDoc,
-  getDocs,
-  onSnapshot,
-  deleteDoc
-} from "https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js";
-
-
 import { appInit } from "./config-firebase.js";
 
-// const analytics = getAnalytics(app);
 const initApp = appInit();
 export const auth = getAuth();
-//const db = getFirestore();
 const provider = new GoogleAuthProvider();
 const userAuth = auth.currentUser;
-// export const userNameTest = auth.currentUser
-// console.log(userNameTest)
 
 
 // Firebase Functions
@@ -69,7 +53,6 @@ export const createUser = (emailInput, passwordInput, userInput) => {
       alert("Revisa tu correo!");
       userInput = auth.currentUser.displayName;      
       console.log(userInput);
-      // console.log('created');
       window.location.hash = "#/login";
 
       return user;
@@ -77,8 +60,6 @@ export const createUser = (emailInput, passwordInput, userInput) => {
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      // console.log(errorCode + errorMessage);
-
       const username = document.querySelector("#user").value;
       const checkbox = document.getElementById("checkbox");
       // span errors
@@ -116,28 +97,6 @@ export const createUser = (emailInput, passwordInput, userInput) => {
   return createUserWithEmailAndPassword;
 };
 
-  
-  const authState = () =>{
-  //const auth = getAuth();
-  onAuthStateChanged(auth, (user) => {
-    const uid = user.uid;
-    console.log(uid)
-    console.log('auth state true')
-    // if (user) { 
-        
-    //   // User is signed in, see docs for a list of available properties
-    //   // https://firebase.google.com/docs/reference/js/firebase.User
-    //   console.log(uid)
-    //   return true
-    //   // ...
-    // } else {
-    //   console.log('auth state false')
-    //   return false
-    //   // User is signed out
-    //   // ...
-    // }
-  });
-}
 
 export const signIn = (emailInput, passwordInput) => {
   signInWithEmailAndPassword(auth, emailInput, passwordInput)
@@ -145,17 +104,7 @@ export const signIn = (emailInput, passwordInput) => {
       // Signed in
       const user = userCredential.user;
       console.log(user);
-      
-    // if (authState) {
-    //   console.log('es true')
       window.location.hash = "#/feed"
-    // } 
-    // else {
-    //   console.log('es false')
-    //   window.location.hash = "#/login";
-    // }
-
-      // ...
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -186,7 +135,7 @@ export const signIn = (emailInput, passwordInput) => {
 
 const emailVerification = () => {
   sendEmailVerification(auth.currentUser).then(() => {
-    // console.log('correo enviado');
+    alert('Revisa tu correo para verificar tu cuenta!');
     // Email verification sent!
     // ...
   });
@@ -196,9 +145,8 @@ const emailVerification = () => {
 export const resetPassword = (email) => {
   sendPasswordResetEmail(auth, email)
     .then(() => {
-      // console.log('Correo enviado');
+      alert('Revisa tu correo y reiniciar tu contraseña');
       // Password reset email sent!
-      // ..
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -214,8 +162,6 @@ export const logOut = () => {
       window.location.hash = "#/home";
     })
     .catch((error) => {
-      // console.log('aun no haz salido')
-      // An error happened.
     });
 };
 

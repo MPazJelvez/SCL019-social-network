@@ -1,18 +1,14 @@
 import {
     getFirestore,
-
     collection,
     doc,
     addDoc,
     getDoc,
-    getDocs,
     onSnapshot,
     deleteDoc,
     updateDoc,
     arrayRemove, 
     arrayUnion,
-    query, orderBy
-
   } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js";
 
 
@@ -22,13 +18,6 @@ export const db = getFirestore();
 
 export const createPost = (title,description, price, materials) => {
     let userName;
-      // si el usuario se registró sin google (es decir no se guardó su displayName)
-      // al momento de crear el post
-      // su nombre será el email.
-      // const q = query(collection(db, "post"), orderBy("date","desc"));
-      // onSnapshot (q, (querySnapshot) => {
-      // querySnapshot.forEach(doc => {
-        // console.log(doc)
       if (auth.currentUser.displayName === null) {
         userName = auth.currentUser.email;
       } else {
@@ -45,8 +34,6 @@ export const createPost = (title,description, price, materials) => {
       numberLike:0,
       date:Date(Date.now()),
         })
-    // });
-  // });
 }
 
 
@@ -58,11 +45,7 @@ export const createPost = (title,description, price, materials) => {
   export const onGetPost = (callback) => {
     onSnapshot(collection(db, 'post'), callback )
   }
-  
-//   export const getPosts = (callback) => {
-//   onSnapshot(collection(db, 'post'), callback)
-//   }
-  
+
   export const deletePost =  id =>{
     deleteDoc(doc(db, 'post', id));
   } 
