@@ -12,7 +12,7 @@ export const feed = () => {
     <div class="featured">
     <h1 class ="destacados"> Destacados </h1>
   <a href="https://www.instagram.com/blondieamigurumis/
-  "><img src="assets/image/blondieamigurumis.jpeg" class="featured-img"/> </a>
+  "><img src="assets/image/blondieamigurumis.jpeg" class="featured-img"/></a>
   <a href="https://www.instagram.com/p.ink.u/
   "><img src="assets/image/Gaby.png" class="featured-img"/> </a>
   <a href="https://www.instagram.com/guatitademanzana/
