@@ -152,6 +152,7 @@ export const feed = () => {
         })
        
         
+        
         //dar like a los post
         const btnLike = postContainer.querySelectorAll('.btn-like');
         console.log(btnLike);
@@ -168,6 +169,7 @@ export const feed = () => {
         });
 
       });
+
 
 
     }  
