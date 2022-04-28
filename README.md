@@ -18,7 +18,7 @@ Personas que realizan trabajos manuales, que necesitan difundir su arte y conect
 
 ## 2. Despliegue
 
-¡Puedes hacer uso de [✨Social Craft✨](https://mpazjelvez.github.io/SCL019-social-network/src/index.html#/home/) **pinchando el enlace**! 
+¡Puedes hacer uso de [✨Social Craft✨](https://mpazjelvez.github.io/SCL019-social-network) **pinchando el enlace**! 
 
 ![](https://i.ibb.co/85KWV38/interfaz-1.png)
 ![](https://i.ibb.co/X2hRmXw/interfaz-2.png)
