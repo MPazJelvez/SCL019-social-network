@@ -1,5 +1,12 @@
 // Este es el punto de entrada de tu aplicacion
+// debugger;
+import { router } from './lib/routers.js';
 
-import { myFunction } from './lib/index.js';
+window.addEventListener('load', () => {
+  router(window.location.hash);
 
-myFunction();
+  window.addEventListener('hashchange', () => {
+    router(window.location.hash);
+  });
+
+});
